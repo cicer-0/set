@@ -1,10 +1,10 @@
-#include "../include/place.hpp"
+#include "../include/set.hpp"
 #include "../include/random.hpp"
 #include "../include/print.hpp"
 using namespace output;
 int main(int argc, char *argv[])
 {
-	Place<int> setA, setB, result;
+	Set<int> setA, setB, result;
 
 	Color
 			AColor{19, 141, 117},
@@ -22,15 +22,15 @@ int main(int argc, char *argv[])
 	Print::wColorLn(BColor, setB.toString());
 	result = setA + setB;
 	Print::wColorLn(unionColor, result.toString());
-	result = Place<int>::unionPlace(setA, setB);
+	result = Set<int>::unionSet(setA, setB);
 	Print::wColorLn(unionColor, result.toString());
 	result = setA * setB;
 	Print::wColorLn(intersectionColor, result.toString());
-	result = Place<int>::intersectionPlace(setA, setB);
+	result = Set<int>::intersectionSet(setA, setB);
 	Print::wColorLn(intersectionColor, result.toString());
 	result = setA - setB;
 	Print::wColorLn(differenceColor, result.toString());
-	result = Place<int>::differencePlace(setA, setB);
+	result = Set<int>::differenceSet(setA, setB);
 	Print::wColorLn(differenceColor, result.toString());
 	return 0;
 }

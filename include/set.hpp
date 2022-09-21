@@ -1,19 +1,19 @@
 /**
- * @file place.hpp
+ * @file set.hpp
  * @author Luis Gorpa (Luis@hotmail.com)
  * @brief Clase para el manejo de conjuntos
  * @version 0.1
  * @date 2022-09-20
  * @code {.cpp}
-    #include "../include/place.hpp"
+    #include "../include/Set.hpp"
     #include "../include/random.hpp"
     #include "../include/print.hpp"
     #include <list>
     int main(int argc, char *argv[])
     {
-      Place<int> setA;
-      Place<int> setB;
-      Place<int> result;
+      Set<int> setA;
+      Set<int> setB;
+      Set<int> result;
       for (size_t i = 0; i < 10; i++)
         setA.add(RandomMath::numberInt(30));
       for (size_t i = 0; i < 10; i++)
@@ -28,8 +28,8 @@
  * @copyright Copyright (c) 2022
  *
  */
-#ifndef PLACE_H
-#define PLACE_H
+#ifndef SET_H
+#define SET_H
 
 #pragma once
 #include "../include/print.hpp"
@@ -42,31 +42,31 @@ using namespace std;
  * @tparam T
  */
 template <class T>
-class Place
+class Set
 {
 public:
   /**
-   * @brief Construct a new Place object
+   * @brief Construct a new Set object
    *
    */
-  Place();
+  Set();
   /**
-   * @brief Construct a new Place object
+   * @brief Construct a new Set object
    *
    * @param value
    */
-  Place(T value);
+  Set(T value);
   /**
-   * @brief Construct a new Place object
+   * @brief Construct a new Set object
    *
    * @param origin
    */
-  Place(Place<T> &origin);
+  Set(Set<T> &origin);
   /**
-   * @brief Destroy the Place object
+   * @brief Destroy the Set object
    *
    */
-  ~Place();
+  ~Set();
   /**
    * @brief Get the Size object
    *
@@ -138,57 +138,57 @@ public:
    * @brief
    *
    * @param other
-   * @return Place<T>&
+   * @return Set<T>&
    */
-  Place<T> &operator=(const Place<T> &other);
+  Set<T> &operator=(const Set<T> &other);
   /**
    * @brief
    *
    * @param addends
-   * @return Place<T>
+   * @return Set<T>
    */
-  Place<T> operator+(Place<T> addends);
+  Set<T> operator+(Set<T> addends);
   /**
    * @brief
    *
    * @param subtrahend
-   * @return Place<T>
+   * @return Set<T>
    */
-  Place<T> operator-(Place<T> subtrahend);
+  Set<T> operator-(Set<T> subtrahend);
   /**
    * @brief
    *
    * @param factor
-   * @return Place<T>
+   * @return Set<T>
    */
-  Place<T> operator*(Place<T> factor);
-  // Place<T> operator+(const Place<T>) const;
-  // Place<T> operator-(const Place<T>) const;
-  // Place<T> operator*(const Place<T>) const;
+  Set<T> operator*(Set<T> factor);
+  // Set<T> operator+(const Set<T>) const;
+  // Set<T> operator-(const Set<T>) const;
+  // Set<T> operator*(const Set<T>) const;
   /**
    * @brief
    *
-   * @param APlace
-   * @param BPlace
-   * @return Place<T>
+   * @param ASet
+   * @param BSet
+   * @return Set<T>
    */
-  static Place<T> intersectionPlace(Place<T> &APlace, Place<T> &BPlace);
+  static Set<T> intersectionSet(Set<T> &ASet, Set<T> &BSet);
   /**
    * @brief
    *
-   * @param APlace
-   * @param BPlace
-   * @return Place<T>
+   * @param ASet
+   * @param BSet
+   * @return Set<T>
    */
-  static Place<T> unionPlace(Place<T> &APlace, Place<T> &BPlace);
+  static Set<T> unionSet(Set<T> &ASet, Set<T> &BSet);
   /**
    * @brief
    *
-   * @param APlace
-   * @param BPlace
-   * @return Place<T>
+   * @param ASet
+   * @param BSet
+   * @return Set<T>
    */
-  static Place<T> differencePlace(Place<T> &APlace, Place<T> &BPlace);
+  static Set<T> differenceSet(Set<T> &ASet, Set<T> &BSet);
 
 private:
   /**
@@ -233,21 +233,21 @@ private:
   static void errorThrowerIfLambda(_FUNCTION action);
 };
 template <class T>
-Place<T>::Place() : head(NULL), size(0) {}
+Set<T>::Set() : head(NULL), size(0) {}
 template <class T>
-Place<T>::Place(T value) : size(1) { this->head = new Node<T>{value}; }
+Set<T>::Set(T value) : size(1) { this->head = new Node<T>{value}; }
 template <class T>
-Place<T>::Place(Place<T> &origin) : head(NULL), size(0)
+Set<T>::Set(Set<T> &origin) : head(NULL), size(0)
 {
-  Place<T> *place{this};
+  Set<T> *Set{this};
   origin.forEach(
-      [&place](T element)
+      [&Set](T element)
       {
-        place->add(element);
+        Set->add(element);
       });
 }
 template <class T>
-Place<T>::~Place()
+Set<T>::~Set()
 {
   Node<T> *next;
   while (this->head != NULL)
@@ -259,9 +259,9 @@ Place<T>::~Place()
   this->size = 0;
 }
 template <class T>
-unsigned int Place<T>::getSize() { return this->size; };
+unsigned int Set<T>::getSize() { return this->size; };
 template <class T>
-void Place<T>::add(T value)
+void Set<T>::add(T value)
 {
   if (this->head == NULL)
     this->head = new Node<T>{value};
@@ -270,7 +270,7 @@ void Place<T>::add(T value)
   this->size++;
 }
 template <class T>
-void Place<T>::addNoRepeat(T value)
+void Set<T>::addNoRepeat(T value)
 {
   if (this->head == NULL)
     this->head = new Node<T>{value}, this->size++;
@@ -287,9 +287,9 @@ void Place<T>::addNoRepeat(T value)
   }
 }
 template <class T>
-T Place<T>::back() { return *this->last()->getValue(); }
+T Set<T>::back() { return *this->last()->getValue(); }
 template <class T>
-Node<T> *Place<T>::last()
+Node<T> *Set<T>::last()
 {
   return this->travel(
       [](Node<T> *node)
@@ -297,9 +297,9 @@ Node<T> *Place<T>::last()
 }
 template <class T>
 template <typename _FUNCTION>
-Node<T> *Place<T>::travel(_FUNCTION action)
+Node<T> *Set<T>::travel(_FUNCTION action)
 {
-  Place<T>::errorThrowerIfLambda(action);
+  Set<T>::errorThrowerIfLambda(action);
   Node<T> *Pnode{this->head};
   Node<T> *Preturn;
   while (Pnode != NULL)
@@ -313,7 +313,7 @@ Node<T> *Place<T>::travel(_FUNCTION action)
   return Preturn;
 }
 template <class T>
-Node<T> *Place<T>::_at(unsigned int index)
+Node<T> *Set<T>::_at(unsigned int index)
 {
   if (index < 0 || index >= this->size)
   {
@@ -333,13 +333,13 @@ Node<T> *Place<T>::_at(unsigned int index)
       });
 }
 template <class T>
-T Place<T>::at(unsigned int index)
+T Set<T>::at(unsigned int index)
 {
   Node<T> *value{this->_at(index)};
   return *(value->getValue());
 }
 template <class T>
-void Place<T>::deleteAt(unsigned int index)
+void Set<T>::deleteAt(unsigned int index)
 {
   if (index < 0 || index >= this->size)
   {
@@ -379,9 +379,9 @@ void Place<T>::deleteAt(unsigned int index)
 
 template <class T>
 template <typename _FUNCTION>
-T *Place<T>::find(_FUNCTION action)
+T *Set<T>::find(_FUNCTION action)
 {
-  Place<T>::errorThrowerIfLambda(action);
+  Set<T>::errorThrowerIfLambda(action);
   T *value{NULL};
   this->travel(
       [&action, &value](Node<T> *node)
@@ -400,7 +400,7 @@ T *Place<T>::find(_FUNCTION action)
 }
 template <class T>
 template <typename _FUNCTION>
-void Place<T>::errorThrowerIfLambda(_FUNCTION action)
+void Set<T>::errorThrowerIfLambda(_FUNCTION action)
 {
   string TYPE{typeid(action).name()};
   const int NUM = TYPE.find("EUl");
@@ -409,9 +409,9 @@ void Place<T>::errorThrowerIfLambda(_FUNCTION action)
 }
 template <class T>
 template <typename _FUNCTION>
-void Place<T>::forEach(_FUNCTION action)
+void Set<T>::forEach(_FUNCTION action)
 {
-  Place<T>::errorThrowerIfLambda(action);
+  Set<T>::errorThrowerIfLambda(action);
   Node<T> *Pnode{this->head};
   while (Pnode != NULL)
   {
@@ -420,7 +420,7 @@ void Place<T>::forEach(_FUNCTION action)
   }
 }
 template <class T>
-string Place<T>::toString()
+string Set<T>::toString()
 {
   string type(typeid(*(this->head->getValue())).name());
   string inText{"{"};
@@ -438,15 +438,15 @@ string Place<T>::toString()
 }
 
 template <class T>
-T &Place<T>::operator[](unsigned int index)
+T &Set<T>::operator[](unsigned int index)
 {
   Node<T> *value{this->_at(index)};
   return *value->getValue();
 }
 template <class T>
-Place<T> &Place<T>::operator=(const Place<T> &other)
+Set<T> &Set<T>::operator=(const Set<T> &other)
 {
-  this->~Place();
+  this->~Set();
   Node<T> *Pnode{other.head};
   while (Pnode != NULL)
   {
@@ -456,9 +456,9 @@ Place<T> &Place<T>::operator=(const Place<T> &other)
   return *this;
 }
 template <class T>
-Place<T> Place<T>::operator+(Place<T> addends)
+Set<T> Set<T>::operator+(Set<T> addends)
 {
-  Place<T> _union_;
+  Set<T> _union_;
   this->forEach(
       [&_union_](T element)
       { _union_.addNoRepeat(element); });
@@ -468,9 +468,9 @@ Place<T> Place<T>::operator+(Place<T> addends)
   return _union_;
 }
 template <class T>
-Place<T> Place<T>::operator-(Place<T> subtrahend)
+Set<T> Set<T>::operator-(Set<T> subtrahend)
 {
-  Place<T> _difference_;
+  Set<T> _difference_;
   this->forEach(
       [&_difference_, &subtrahend](T elementThis)
       {
@@ -486,9 +486,9 @@ Place<T> Place<T>::operator-(Place<T> subtrahend)
   return _difference_;
 }
 template <class T>
-Place<T> Place<T>::operator*(Place<T> factor)
+Set<T> Set<T>::operator*(Set<T> factor)
 {
-  Place<T> _intersection_;
+  Set<T> _intersection_;
   this->forEach(
       [&_intersection_, &factor](T elementThis)
       {
@@ -504,24 +504,24 @@ Place<T> Place<T>::operator*(Place<T> factor)
   return _intersection_;
 }
 template <class T>
-Place<T> Place<T>::intersectionPlace(Place<T> &APlace, Place<T> &BPlace)
+Set<T> Set<T>::intersectionSet(Set<T> &ASet, Set<T> &BSet)
 {
-  Place<T> _intersection_;
-  _intersection_ = APlace * BPlace;
+  Set<T> _intersection_;
+  _intersection_ = ASet * BSet;
   return _intersection_;
 }
 template <class T>
-Place<T> Place<T>::unionPlace(Place<T> &APlace, Place<T> &BPlace)
+Set<T> Set<T>::unionSet(Set<T> &ASet, Set<T> &BSet)
 {
-  Place<T> _union_;
-  _union_ = APlace + BPlace;
+  Set<T> _union_;
+  _union_ = ASet + BSet;
   return _union_;
 }
 template <class T>
-Place<T> Place<T>::differencePlace(Place<T> &APlace, Place<T> &BPlace)
+Set<T> Set<T>::differenceSet(Set<T> &ASet, Set<T> &BSet)
 {
-  Place<T> _difference_;
-  _difference_ = APlace - BPlace;
+  Set<T> _difference_;
+  _difference_ = ASet - BSet;
   return _difference_;
 }
 

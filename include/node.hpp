@@ -1,7 +1,7 @@
 /**
  * @file node.hpp
  * @author Luis Gorpa (Luis@hotmail.com)
- * @brief Clase Node el cual estara compuesto la clase Place
+ * @brief Clase Node el cual estara compuesto la clase Set
  * @version 0.1
  * @date 2022-09-20
  *
