@@ -8,6 +8,8 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "${fileDirname}/../include/cpp/print.cpp",
+                "${fileDirname}/../include/cpp/random.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
