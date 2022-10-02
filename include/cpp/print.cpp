@@ -1,44 +1,44 @@
 #include "../print.hpp"
 #include <iostream>
 using namespace std;
-output::Color::Color() : _red(char(255)), _green(char(255)), _blue(char(255)) {}
+output::Color::Color() : red(char(255)), green(char(255)), blue(char(255)) {}
 output::Color::Color(unsigned short int red, unsigned short int green, unsigned short int blue)
 {
   if (red > 255 || green > 255 || blue > 255)
     throw "the assigned color is invalid";
-  this->_red = char(red);
-  this->_green = char(green);
-  this->_blue = char(blue);
+  this->red = char(red);
+  this->green = char(green);
+  this->blue = char(blue);
 }
 void output::Color::change(unsigned short int red, unsigned short int green, unsigned short int blue)
 {
   if (red > 255 || green > 255 || blue > 255)
     throw "the assigned color is invalid";
-  this->_red = red;
-  this->_green = green;
-  this->_blue = blue;
+  this->red = red;
+  this->green = green;
+  this->blue = blue;
 }
 void output::Color::setRed(unsigned short int red)
 {
   if (red > 255)
     throw "the assigned color is invalid";
-  this->_red = red;
+  this->red = red;
 }
 void output::Color::setGreen(unsigned short int green)
 {
   if (green > 255)
     throw "the assigned color is invalid";
-  this->_green = green;
+  this->green = green;
 }
 void output::Color::setBlue(unsigned short int blue)
 {
   if (blue > 255)
     throw "the assigned color is invalid";
-  this->_blue = blue;
+  this->blue = blue;
 }
-int output::Color::getRed() { return this->_red; }
-int output::Color::getGreen() { return this->_green; }
-int output::Color::getBlue() { return this->_blue; }
+int output::Color::getRed() { return this->red; }
+int output::Color::getGreen() { return this->green; }
+int output::Color::getBlue() { return this->blue; }
 output::Color::~Color() {}
 
 void output::Print::to(string message) { cout << message; }

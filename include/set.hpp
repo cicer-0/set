@@ -1,29 +1,9 @@
 /**
  * @file set.hpp
  * @author Luis Gorpa (Luis@hotmail.com)
- * @brief Clase para el manejo de conjuntos
- * @version 0.1
+ * @brief Manipular conjuntos
+ * @version 1.0
  * @date 2022-09-20
- * @code {.cpp}
-    #include "../include/set.hpp"
-    #include "../include/random.hpp"
-    #include "../include/print.hpp"
-    #include <list>
-    int main(int argc, char *argv[])
-    {
-      Set<int> setA;
-      Set<int> setB;
-      Set<int> result;
-      for (size_t i = 0; i < 10; i++)
-        setA.add(RandomMath::numberInt(30));
-      for (size_t i = 0; i < 10; i++)
-        setB.add(RandomMath::numberInt(30));
-      result = setA + setB;
-      result = setA - setB;
-      result = setA * setB;
-      return 0;
-    }
- * @endcode
  *
  * @copyright Copyright (c) 2022
  *
@@ -37,136 +17,134 @@
 #include <string>
 using namespace std;
 /**
- * @brief
+ * @brief Contenedor generico que representa a un Conjunto.
  *
- * @tparam T
+ * @tparam T Tipo de elemnto.
  */
 template <class T>
 class Set
 {
 public:
   /**
-   * @brief Construct a new Set object
+   * @brief Construir un nuevo objeto Set el cual inicia con el atributo @b head nulo y @b size 0.
    *
    */
   Set();
   /**
-   * @brief Construct a new Set object
+   * @brief Construir un nuevo objeto Set con un elemnto
    *
    * @param value
    */
   Set(T value);
   /**
-   * @brief Construct a new Set object
+   * @brief (Contructor copia) Construir un nuevo objeto Set copiando de otro objeto Set
    *
    * @param origin
    */
   Set(Set<T> &origin);
   /**
-   * @brief Destroy the Set object
+   * @brief Destruir el objeto Set
    *
    */
   ~Set();
   /**
-   * @brief Get the Size object
+   * @brief Obtener el atributo @b size
    *
    * @return unsigned int
    */
   unsigned int getSize();
   /**
-   * @brief
+   * @brief Añadir un elemento al cojunto
    *
    * @param value
    */
   void add(T value);
   /**
-   * @brief
+   * @brief Añadir un elemento al cojunto, no se añadira si este dato ya existe
    *
    * @param value
    */
   void addNoRepeat(T value);
   /**
-   * @brief
+   * @brief (buscador) Devuelve el valor del primer elemento del conjunto donde el predicado es verdadero.
    *
-   * @tparam _FUNCTION
-   * @param action
+   * @tparam _FUNCTION Funcion lambda
+   * @param action Find llama al predicado una vez para cada elemento del conjunto, en orden ascendente, hasta que encuentra uno en el que el predicado devuelve verdadero. Si se encuentra dicho elemento, find devuelve inmediatamente ese valor de elemento. De lo contrario, find devuelve nulo.
    * @return T*
    */
   template <typename _FUNCTION>
   T *find(_FUNCTION action);
   /**
-   * @brief
+   * @brief Devuelve el último elemento que puede encontrarse en el Conjunto, ó nulo si el elemento no se encontrara
    *
    * @return T
    */
-  T back();
+  T *back();
   /**
-   * @brief
+   * @brief Recibe un valor numérico entero y devuelve el elemento en esa posición
    *
    * @param index
    * @return T
    */
   T at(unsigned int index);
   /**
-   * @brief
+   * @brief Recibe un valor numérico entero y elimina el elemento en esa posición
    *
    * @param index
    */
   void deleteAt(unsigned int index);
   /**
-   * @brief
+   * @brief Ejecuta la función indicada una vez por cada elemento del conjunto
    *
    * @tparam _FUNCTION
-   * @param action
+   * @param action Función a ejecutar por cada elemento, el cual
+   * recibe como parametro @b <T> elemento actual siendo procesado en el conjunto
    */
   template <typename _FUNCTION>
   void forEach(_FUNCTION action);
   /**
-   * @brief
+   * @brief Devuelve una cadena que representa al Conjunto
    *
    * @return string
    */
   string toString();
   /**
-   * @brief
+   * @brief Obtener elemento del conjunto mediante un indice
    * @param index
    * @return T&
    * @link https://www.geeksforgeeks.org/overloading-subscript-or-array-index-operator-in-c/ @endlink
    */
   T &operator[](unsigned int index);
   /**
-   * @brief
+   * @brief Asigna el conjunto del operando derecho al operando izquierdo
    *
    * @param other
    * @return Set<T>&
    */
   Set<T> &operator=(const Set<T> &other);
   /**
-   * @brief
+   * @brief Unir dos conjuntos
    *
    * @param addends
    * @return Set<T>
    */
-  Set<T> operator+(Set<T> addends);
+  Set<T> operator+(const Set<T> addends);
   /**
-   * @brief
+   * @brief Diferencia de dos conjuntos
    *
    * @param subtrahend
    * @return Set<T>
    */
-  Set<T> operator-(Set<T> subtrahend);
+  Set<T> operator-(const Set<T> subtrahend);
   /**
-   * @brief
+   * @brief Interseccion de dos conjuntos
    *
    * @param factor
    * @return Set<T>
    */
-  Set<T> operator*(Set<T> factor);
-  // Set<T> operator+(const Set<T>) const;
-  // Set<T> operator-(const Set<T>) const;
-  // Set<T> operator*(const Set<T>) const;
+  Set<T> operator*(const Set<T> factor);
   /**
-   * @brief
+   * @brief Interseccion de dos conjuntos
    *
    * @param ASet
    * @param BSet
@@ -174,7 +152,7 @@ public:
    */
   static Set<T> intersectionSet(Set<T> &ASet, Set<T> &BSet);
   /**
-   * @brief
+   * @brief Unir dos conjuntos
    *
    * @param ASet
    * @param BSet
@@ -182,7 +160,7 @@ public:
    */
   static Set<T> unionSet(Set<T> &ASet, Set<T> &BSet);
   /**
-   * @brief
+   * @brief Diferencia de dos conjuntos
    *
    * @param ASet
    * @param BSet
@@ -192,45 +170,52 @@ public:
 
 private:
   /**
-   * @brief
+   * @brief Node cabezera el cual empieza la lista enlazadas
    *
    */
   Node<T> *head;
   /**
-   * @brief
+   * @brief Tamaño del conjunto
    *
    */
   unsigned int size;
   /**
-   * @brief
+   * @brief Devuelve el último Node que puede encontrarse en el Conjunto, ó nulo si el Node no se encontrara
    *
    * @return Node<T>*
    */
   Node<T> *last();
   /**
-   * @brief
+   * @brief (Recorrer Conjunto) Devuelve el Node donde se detiene el recorrido
    *
    * @tparam _FUNCTION
-   * @param action
+   * @param action Es la funcion lambda que se ejecuta en cada Node. Debe retornar un @b bool
+   * para indicar su detencion del recorrido, el cual recibe como parametro un Node<T> *
    * @return Node<T>*
    */
   template <typename _FUNCTION>
   Node<T> *travel(_FUNCTION action);
   /**
-   * @brief
+   * @brief Recibe un valor numérico entero y devuelve el Node en esa posición
    *
    * @param index
    * @return Node<T>*
    */
   Node<T> *_at(unsigned int index);
   /**
-   * @brief
+   * @brief Lanza un error si @b action no es una funcion lambda
    *
    * @tparam _FUNCTION
    * @param action
    */
   template <typename _FUNCTION>
   static void errorThrowerIfLambda(_FUNCTION action);
+  /**
+   * @brief Lanza un error si @b index esta fuera de rando del tamaño del indice
+   *
+   * @param index
+   */
+  static void errorThrowerOutOfRange(unsigned int index, Set<T> set);
 };
 template <class T>
 Set<T>::Set() : head(NULL), size(0) {}
@@ -287,7 +272,12 @@ void Set<T>::addNoRepeat(T value)
   }
 }
 template <class T>
-T Set<T>::back() { return *this->last()->getValue(); }
+T *Set<T>::back()
+{
+  T *value;
+  value = this->last()->getValue();
+  return value;
+}
 template <class T>
 Node<T> *Set<T>::last()
 {
@@ -315,11 +305,7 @@ Node<T> *Set<T>::travel(_FUNCTION action)
 template <class T>
 Node<T> *Set<T>::_at(unsigned int index)
 {
-  if (index < 0 || index >= this->size)
-  {
-    throw "INDICE INVALIDO";
-    // exit(0);
-  }
+  errorThrowerOutOfRange(index, *this);
   int position{0};
   return this->travel(
       [&position, &index](Node<T> *node)
@@ -341,10 +327,7 @@ T Set<T>::at(unsigned int index)
 template <class T>
 void Set<T>::deleteAt(unsigned int index)
 {
-  if (index < 0 || index >= this->size)
-  {
-    throw "INDICE INVALIDO";
-  }
+  errorThrowerOutOfRange(index, *this);
   int position{0};
   Node<T> *Ppast;
   Node<T> *Pnode{this->head};
@@ -406,6 +389,12 @@ void Set<T>::errorThrowerIfLambda(_FUNCTION action)
   const int NUM = TYPE.find("EUl");
   if (NUM < 0 || NUM >= TYPE.length() ? 1 : 0)
     throw "NO ES UNA LAMBDA";
+}
+template <class T>
+void Set<T>::errorThrowerOutOfRange(unsigned int index, Set<T> set)
+{
+  if (index < 0 || index >= set.size)
+    throw "INDICE INVALIDO";
 }
 template <class T>
 template <typename _FUNCTION>

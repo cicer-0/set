@@ -1,8 +1,8 @@
 /**
  * @file print.hpp
  * @author Luis Gorpa (Luis@hotmail.com)
- * @brief
- * @version 0.1
+ * @brief Salida a Colores
+ * @version 1.0
  *  @date 2022-09-20
  *
  * @copyright Copyright (c) 2022
@@ -16,7 +16,7 @@
 #include <iostream>
 using namespace std;
 /**
- * @brief declaraciones de las clases que trabajaran para una salida de a Colores.
+ * @brief declaraciones de las clases que trabajaran para una salida a Colores.
  * @note https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
  *
  */
@@ -24,135 +24,135 @@ namespace output
 {
   /**
    *
-   * @brief
+   * @brief Expresa un color de acuerdo con sus componentes rojo, verde y azul
    *
    */
   class Color
   {
   private:
     /**
-     * @brief
+     * @brief Nivel de rojo 0-255
      *
      */
-    unsigned char _red;
+    unsigned char red;
     /**
-     * @brief
+     * @brief Nivel de verde 0-255
      *
      */
-    unsigned char _green;
+    unsigned char green;
     /**
-     * @brief
+     * @brief Nivel de azul 0-255
      *
      */
-    unsigned char _blue;
+    unsigned char blue;
 
   public:
     /**
-     * @brief Construct a new Color object
+     * @brief Construir un nuevo objeto Color por defecto negro
      *
      */
     Color();
     /**
-     * @brief Construct a new Color object
+     * @brief Construir un nuevo objeto Color
      *
-     * @param red
-     * @param green
-     * @param blue
+     * @param red Nivel de rojo 0-255
+     * @param green Nivel de verde 0-255
+     * @param blue Nivel de azul 0-255
      */
     Color(unsigned short int red,
           unsigned short int green,
           unsigned short int blue);
     /**
-     * @brief
+     * @brief Establcer un nuevo color
      *
-     * @param red
-     * @param green
-     * @param blue
+     * @param red Nivel de rojo 0-255
+     * @param green Nivel de verde 0-255
+     * @param blue Nivel de azul 0-255
      */
     void change(unsigned short int red,
                 unsigned short int green,
                 unsigned short int blue);
     /**
-     * @brief Set the Red object
+     * @brief Establecer el atributo @b red
      *
-     * @param red
+     * @param red Nivel de rojo 0-255
      */
     void setRed(unsigned short int red);
     /**
-     * @brief Set the Green object
+     * @brief Establecer el atributo @b green
      *
-     * @param green
+     * @param green Nivel de verde 0-255
      */
     void setGreen(unsigned short int green);
     /**
-     * @brief Set the Blue object
+     * @brief Establecer el atributo @b blue
      *
-     * @param blue
+     * @param blue Nivel de azul 0-255
      */
     void setBlue(unsigned short int blue);
     /**
-     * @brief Get the Red object
+     * @brief Obtener el atributo @b red
      *
      * @return int
      */
     int getRed();
     /**
-     * @brief Get the Green object
+     * @brief Obtener el atributo @b green
      *
      * @return int
      */
     int getGreen();
     /**
-     * @brief Get the Blue object
+     * @brief Obtener el atributo @b blue
      *
      * @return int
      */
     int getBlue();
     /**
-     * @brief Destroy the Color object
+     * @brief Destruir el objeto Color
      *
      */
     ~Color();
   };
   /**
-   * @brief
+   * @brief Clase encargada de la salida a colores
    *
    */
   class Print
   {
   public:
     /**
-     * @brief
+     * @brief Salida clasica
      *
      * @param message
      */
     static void to(string message);
     /**
-     * @brief
+     * @brief Salida clasica
      *
      * @param message
      */
     static void to(double message);
     /**
-     * @brief
+     * @brief Salida clasica
      *
      * @param message
      */
     static void to(int message);
     /**
-     * @brief
+     * @brief Salida clasica
      *
      * @param message
      */
     static void to(char message);
     /**
-     * @brief
+     * @brief Salida clasica
      *
      * @param message
      */
     static void to(float message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo
      *
      * @param color
      * @param background
@@ -160,7 +160,7 @@ namespace output
      */
     static void to(Color color, Color background, string message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo
      *
      * @param color
      * @param background
@@ -168,7 +168,7 @@ namespace output
      */
     static void to(Color color, Color background, double message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo
      *
      * @param color
      * @param background
@@ -176,7 +176,7 @@ namespace output
      */
     static void to(Color color, Color background, int message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo
      *
      * @param color
      * @param background
@@ -184,7 +184,7 @@ namespace output
      */
     static void to(Color color, Color background, char message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo
      *
      * @param color
      * @param background
@@ -192,37 +192,37 @@ namespace output
      */
     static void to(Color color, Color background, float message);
     /**
-     * @brief
+     * @brief Salida clasica, includo un salto de linea
      *
      * @param message
      */
     static void ln(string message);
     /**
-     * @brief
+     * @brief Salida clasica, includo un salto de linea
      *
      * @param message
      */
     static void ln(double message);
     /**
-     * @brief
+     * @brief Salida clasica, includo un salto de linea
      *
      * @param message
      */
     static void ln(int message);
     /**
-     * @brief
+     * @brief Salida clasica, includo un salto de linea
      *
      * @param message
      */
     static void ln(char message);
     /**
-     * @brief
+     * @brief Salida clasica, includo un salto de linea
      *
      * @param message
      */
     static void ln(float message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo, includo un salto de linea
      *
      * @param color
      * @param background
@@ -230,7 +230,7 @@ namespace output
      */
     static void ln(Color color, Color background, string message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo, includo un salto de linea
      *
      * @param color
      * @param background
@@ -238,7 +238,7 @@ namespace output
      */
     static void ln(Color color, Color background, double message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo, includo un salto de linea
      *
      * @param color
      * @param background
@@ -246,7 +246,7 @@ namespace output
      */
     static void ln(Color color, Color background, int message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo, includo un salto de linea
      *
      * @param color
      * @param background
@@ -254,7 +254,7 @@ namespace output
      */
     static void ln(Color color, Color background, char message);
     /**
-     * @brief
+     * @brief Salida a color del elemento y fondo, includo un salto de linea
      *
      * @param color
      * @param background
@@ -262,160 +262,160 @@ namespace output
      */
     static void ln(Color color, Color background, float message);
     /**
-     * @brief
+     * @brief Salida a color del elemento
      *
      * @param color
      * @param message
      */
     static void wColor(Color color, string message);
     /**
-     * @brief
+     * @brief Salida a color del elemento
      *
      * @param color
      * @param message
      */
     static void wColor(Color color, double message);
     /**
-     * @brief
+     * @brief Salida a color del elemento
      *
      * @param color
      * @param message
      */
     static void wColor(Color color, int message);
     /**
-     * @brief
+     * @brief Salida a color del elemento
      *
      * @param color
      * @param message
      */
     static void wColor(Color color, char message);
     /**
-     * @brief
+     * @brief Salida a color del elemento
      *
      * @param color
      * @param message
      */
     static void wColor(Color color, float message);
     /**
-     * @brief
+     * @brief Salida a color del elemento, includo un salto de linea
      *
      * @param color
      * @param message
      */
     static void wColorLn(Color color, string message);
     /**
-     * @brief
+     * @brief Salida a color del elemento, includo un salto de linea
      *
      * @param color
      * @param message
      */
     static void wColorLn(Color color, double message);
     /**
-     * @brief
+     * @brief Salida a color del elemento, includo un salto de linea
      *
      * @param color
      * @param message
      */
     static void wColorLn(Color color, int message);
     /**
-     * @brief
+     * @brief Salida a color del elemento, includo un salto de linea
      *
      * @param color
      * @param message
      */
     static void wColorLn(Color color, char message);
     /**
-     * @brief
+     * @brief Salida a color del elemento, includo un salto de linea
      *
      * @param color
      * @param message
      */
     static void wColorLn(Color color, float message);
     /**
-     * @brief
+     * @brief Salida a color del fondo
      *
      * @param background
      * @param message
      */
     static void wBKGD(Color background, string message);
     /**
-     * @brief
+     * @brief Salida a color del fondo
      *
      * @param background
      * @param message
      */
     static void wBKGD(Color background, double message);
     /**
-     * @brief
+     * @brief Salida a color del fondo
      *
      * @param background
      * @param message
      */
     static void wBKGD(Color background, int message);
     /**
-     * @brief
+     * @brief Salida a color del fondo
      *
      * @param background
      * @param message
      */
     static void wBKGD(Color background, char message);
     /**
-     * @brief
+     * @brief Salida a color del fondo
      *
      * @param background
      * @param message
      */
     static void wBKGD(Color background, float message);
     /**
-     * @brief
+     * @brief Salida a color del fondo,includo un salto de linea
      *
      * @param background
      * @param message
      */
     static void wBKGDLn(Color background, string message);
     /**
-     * @brief
+     * @brief Salida a color del fondo,includo un salto de linea
      *
      * @param background
      * @param message
      */
     static void wBKGDLn(Color background, double message);
     /**
-     * @brief
+     * @brief Salida a color del fondo,includo un salto de linea
      *
      * @param background
      * @param message
      */
     static void wBKGDLn(Color background, int message);
     /**
-     * @brief
+     * @brief Salida a color del fondo,includo un salto de linea
      *
      * @param background
      * @param message
      */
     static void wBKGDLn(Color background, char message);
     /**
-     * @brief
+     * @brief Salida a color del fondo,includo un salto de linea
      *
      * @param background
      * @param message
      */
     static void wBKGDLn(Color background, float message);
     /**
-     * @brief
+     * @brief Salida de salto de linea
      *
      */
     static void endl();
     /**
-     * @brief
+     * @brief Salida de salto de linea, n veces
      *
-     * @param n
+     * @param n Cantidad de saltos de lineas
      */
     static void endl(unsigned int n);
     /**
-     * @brief
+     * @brief Salida de tabulaciones, n veces
      *
-     * @param n
+     * @param n Cantidad de tabulaciones
      */
     static void tab(unsigned int n);
 
