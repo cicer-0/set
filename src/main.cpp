@@ -1,11 +1,9 @@
 #include "../include/set.hpp"
 #include "../include/random.hpp"
 #include "../include/print.hpp"
-#include <list>
 using namespace output;
 int main(int argc, char *argv[])
 {
-	list<string> s = list<string>();
 	Set<int> setA, setB, result;
 	Color
 			AColor{19, 141, 117},
