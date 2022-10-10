@@ -26,16 +26,16 @@ class Set
 {
 public:
   /**
-   * @brief Construir un nuevo objeto Set el cual inicia con el atributo @b head nulo y @b size 0.
+   * @brief Construir un nuevo objeto Set el cual inicia con el atributo @b head nulo , @b size 0 y @b name un texto vacio.
    *
    */
   Set();
   /**
-   * @brief Construir un nuevo objeto Set con un elemnto
+   * @brief Construir un nuevo objeto Set el cual inicia con el atributo @b head nulo , @b size 0 y @b name es asignado.
    *
-   * @param value
+   * @param name
    */
-  Set(T value);
+  Set(string name);
   /**
    * @brief (Contructor copia) Construir un nuevo objeto Set copiando de otro objeto Set
    *
@@ -54,6 +54,18 @@ public:
    */
   unsigned int getSize();
   /**
+   * @brief Obtener el atributo @b name
+   *
+   * @return string
+   */
+  string getName();
+  /**
+   * @brief Establecer el atributo @b name
+   *
+   * @param name
+   */
+  void setName(string name);
+  /**
    * @brief Añadir un elemento al cojunto
    *
    * @param value
@@ -65,6 +77,13 @@ public:
    * @param value
    */
   void addNoRepeat(T value);
+  /**
+   * @brief Añadir un elemento al cojunto, de acuerdo al indice
+   *
+   * @param index
+   * @param value
+   */
+  void insert(unsigned int index, T value);
   /**
    * @brief (buscador) Devuelve el valor del primer elemento del conjunto donde el predicado es verdadero.
    *
@@ -180,6 +199,11 @@ private:
    */
   unsigned int size;
   /**
+   * @brief nombre del conjunto
+   *
+   */
+  string name;
+  /**
    * @brief Devuelve el último Node que puede encontrarse en el Conjunto, ó nulo si el Node no se encontrara
    *
    * @return Node<T>*
@@ -218,9 +242,9 @@ private:
   static void errorThrowerOutOfRange(unsigned int index, Set<T> set);
 };
 template <class T>
-Set<T>::Set() : head(NULL), size(0) {}
+Set<T>::Set() : head(NULL), size(0), name("") {}
 template <class T>
-Set<T>::Set(T value) : size(1) { this->head = new Node<T>{value}; }
+Set<T>::Set(string name) : head(NULL), size(0), name(name) {}
 template <class T>
 Set<T>::Set(Set<T> &origin) : head(NULL), size(0)
 {
@@ -246,6 +270,10 @@ Set<T>::~Set()
 template <class T>
 unsigned int Set<T>::getSize() { return this->size; };
 template <class T>
+string Set<T>::getName() { return this->name; }
+template <class T>
+void Set<T>::setName(string name) { this->name = name; }
+template <class T>
 void Set<T>::add(T value)
 {
   if (this->head == NULL)
@@ -270,6 +298,33 @@ void Set<T>::addNoRepeat(T value)
     if (repeated == NULL)
       (this->last())->setNext(new Node<T>{value}), this->size++;
   }
+}
+template <class T>
+void Set<T>::insert(unsigned int index, T value)
+{
+  errorThrowerOutOfRange(index, *this);
+  this->size++;
+  int position{0};
+  if (index == 0)
+  {
+    Node<T> *newHead = new Node<T>(value);
+    newHead->setNext(this->head);
+    this->head = newHead;
+    return;
+  }
+  this->travel(
+      [&position, index, value](Node<T> *node)
+      {
+        if (position == index - 1)
+        {
+          Node<T> *insert = new Node<T>(value);
+          insert->setNext(node->getNext());
+          node->setNext(insert);
+          return true;
+        }
+        position++;
+        return false;
+      });
 }
 template <class T>
 T *Set<T>::back()
